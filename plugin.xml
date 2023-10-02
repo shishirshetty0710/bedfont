@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="org.mskcc.bedfont" version="1.0.0"
+    xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>msk-bedfont-plugin</name>
+
+    <engines>
+        <engine name="cordova" version=">=3.2.0" />
+    </engines>
+    <js-module name="msk-bedfont-plugin" src="www/msk-bedfont-plugin.js">
+        <clobbers target="cordova.plugins.bedfont" />
+    </js-module>
+
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="MSKBedfontPlugin">
+                <param name="android-package" value="org.mskcc.bedfont.MSKBedfontPlugin" />
+            </feature>
+        </config-file>
+        <config-file parent="/*" target="AndroidManifest.xml"></config-file>
+        <source-file src="src/android/MSKBedfontPlugin.java" target-dir="src/org/mskcc/bedfont/MSKBedfontPlugin" />
+
+        <config-file target="../../config.xml" parent="/widget">
+            <custom-preference name="android-manifest/@xmlns:tools" value="http://schemas.android.com/tools" />
+            <custom-preference name="android-manifest/application/@android:theme" value="@style/Theme.AppCompat.Light" />
+        </config-file>
+
+        <!-- SDK files -->
+        <resource-file src="src/android/libs/iCOBluetoothsdk-2.0.0.15-release.aar" target="libs/iCOBluetoothsdk-2.0.0.15-release.aar" />
+        <!-- END SDK files -->
+
+        <!-- AndroidManifiest.xml Permissions -->
+        <config-file parent="/*" target="AndroidManifest.xml">
+            <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+            <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION_LOCATION" />
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+            <!-- Request legacy Bluetooth permissions on older devices. -->
+            <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
+            <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
+            <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
+        </config-file>
+        <!-- END AndroidManifiest.xml -->
+
+
+        <!-- Gradle -->
+        <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
+        <!-- END Gradle -->
+
+        <dependency id="cordova-custom-config" version="^5.1.1" />
+    </platform>
+
+</plugin>

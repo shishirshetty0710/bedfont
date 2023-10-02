@@ -1,0 +1,16 @@
+{
+    "name": "bedfrontplugin",
+    "version": "1.0.0",
+    "description": "Bedfont SDK with Cordova Wrapper for iOS and Android",
+    "cordova": {
+        "id": "org.mskcc.bedfont",
+        "platforms": [
+            "android"
+        ]
+    },
+    "keywords": [
+        "ecosystem:cordova"
+    ],
+    "author": "",
+    "license": "ISC"
+}
