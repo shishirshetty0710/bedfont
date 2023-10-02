@@ -353,7 +353,7 @@ public class MSKBedfontPlugin extends CordovaPlugin {
 
         JSONObject params = new JSONObject();
         try {
-            params.put("statusName", connectResult);
+            params.put("statusName", statusName);
             params.put("ppm", ppm);
             params.put("isSuccessful", isSuccessful);
         } catch (JSONException e) {
