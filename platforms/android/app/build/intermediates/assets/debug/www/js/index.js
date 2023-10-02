@@ -28,6 +28,8 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
         this.receivedEvent('deviceready');
+
+        cordova.plugins.bedfont.init(Success, Fail);
     },
 
     // Update DOM on a Received Event
@@ -40,6 +42,19 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+    }
+
+    function Success() {
+        $parameters.Success = true;
+        $parameters.ErrorCode = 0;
+        $resolve();
+    }
+
+    function Fail(message) {
+        $parameters.Success = false;
+        $parameters.ErrorCode = 1;
+        $parameters.ErrorMessage = message;
+        $resolve();
     }
 };
 

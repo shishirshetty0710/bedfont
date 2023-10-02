@@ -12,5 +12,8 @@
         "ecosystem:cordova"
     ],
     "author": "",
-    "license": "ISC"
+    "license": "ISC",
+    "dependencies": {
+        "cordova-android": "^7.1.4"
+    }
 }

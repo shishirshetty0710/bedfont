@@ -84,6 +84,8 @@ public class MSKBedfontPlugin extends CordovaPlugin {
         switch (action) {
 
             case "init":
+                final android.widget.Toast toast = android.widget.Toast.makeText(cordova.getActivity().getWindow().getContext(), "Init called", android.widget.Toast.LENGTH_SHORT);
+                toast.show();
                 if(!initialized) {
                     initSDK();
                     initialized=true;
@@ -118,14 +120,14 @@ public class MSKBedfontPlugin extends CordovaPlugin {
                 result = new PluginResult(PluginResult.Status.OK);
                 result.setKeepCallback(false);
                 callback.sendPluginResult(result);
-                retuen true;
+                return true;
 
             case "performDisconnection":
                 perfromDisconnection();
                 result = new PluginResult(PluginResult.Status.OK);
                 result.setKeepCallback(false);
                 callback.sendPluginResult(result);
-                retuen true;
+                return true;
 
             case "testNorecovery":
                 performTestNoRecovery();
