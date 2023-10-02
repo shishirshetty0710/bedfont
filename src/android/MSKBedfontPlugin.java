@@ -86,8 +86,6 @@ public class MSKBedfontPlugin extends CordovaPlugin {
         switch (action) {
 
             case "init":
-                final android.widget.Toast toast = android.widget.Toast.makeText(cordova.getActivity().getWindow().getContext(), "Init called", android.widget.Toast.LENGTH_SHORT);
-                toast.show();
                 if(!initialized) {
                     initSDK();
                     initialized=true;
@@ -376,8 +374,13 @@ public class MSKBedfontPlugin extends CordovaPlugin {
     }
 
     public void fireEvent(String eventName, JSONObject params) {
+        showToast(params.toString());
         String js = "cordova.fireDocumentEvent('" + eventName + "', " + params.toString() + ");";
         webView.getView().post(() -> webView.loadUrl("javascript:" + js));
     }
 
+    private void showToast(String message) {
+        final android.widget.Toast toast = android.widget.Toast.makeText(cordova.getActivity().getWindow().getContext(), message, android.widget.Toast.LENGTH_LONG);
+        toast.show();
+    }
 }
