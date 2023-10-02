@@ -380,7 +380,8 @@ public class MSKBedfontPlugin extends CordovaPlugin {
     }
 
     private void showToast(String message) {
-        final android.widget.Toast toast = android.widget.Toast.makeText(cordova.getActivity().getWindow().getContext(), message, android.widget.Toast.LENGTH_LONG);
-        toast.show();
+//        final android.widget.Toast toast = android.widget.Toast.makeText(cordova.getActivity().getWindow().getContext(), message, android.widget.Toast.LENGTH_LONG);
+//        toast.show();
+        Log.d("Bedfont", message);
     }
 }
