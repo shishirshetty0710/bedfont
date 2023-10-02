@@ -21,6 +21,8 @@ import android.util.Log;
 
 import com.bedfont.icosdk.ble.v2.*;
 
+import io.reactivex.disposables.Disposable;
+
 public class MSKBedfontPlugin extends CordovaPlugin {
 
     /***LIST OF ALL EVENTS****/
