@@ -257,12 +257,12 @@ class MSKBedfontPlugin: CDVPlugin {
         
         do {
             // Convert the dictionary to JSON data
-            let jsonData = try JSONSerialization.data(withJSONObject: eventData, options: [])
+            //let jsonData = try JSONSerialization.data(withJSONObject: eventData, options: [])
             
             // Print the JSON data as a string (for demonstration purposes)
-            if let jsonString = String(data: jsonData, encoding: .utf8) {
-                let jsCode = "cordova.fireDocumentEvent('\(eventName)', \(jsonString));"
-                self.commandDelegate!.evalJs(jsCode)
+           // if let jsonString = String(data: jsonData, encoding: .utf8) {
+             //   let jsCode = "cordova.fireDocumentEvent('\(eventName)', \(jsonString));"
+               // self.commandDelegate!.evalJs(jsCode)
             }
         } catch {
             
