@@ -6,6 +6,9 @@
 import Foundation
 import SmokerlyzerSDK
 
+
+let smokerlyzerBluetooth = SmokerlyzerBluetooth()
+
 @objc(MSKBedfontPlugin)
 class MSKBedfontPlugin: CDVPlugin {
     
@@ -45,8 +48,6 @@ class MSKBedfontPlugin: CDVPlugin {
     var STATE_SCAN_AND_CONNECT = false
     
     var initialized = false
-    
-    var smokerlyzerBluetooth: Any? = nil
     
     var sensor: PeripheralIdentifier?
     var isConnectedText: String = "Disconnected"
