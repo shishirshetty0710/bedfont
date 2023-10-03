@@ -116,6 +116,8 @@ class MSKBedfontPlugin: CDVPlugin {
         if smokerlyzerBluetooth != nil {
             let didScanStart = smokerlyzerBluetooth.scanForPeripheral(
                 stopOnFirstResult: false,
+                onDiscovery: {single, list in
+                },
                 onStopped: {_, error in
                     if let error = error {
                         //self.log(message: "Scan error: " + error.localizedDescription)
