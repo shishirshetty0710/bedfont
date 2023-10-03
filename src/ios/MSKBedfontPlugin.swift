@@ -77,35 +77,35 @@ class MSKBedfontPlugin: CDVPlugin {
     
     @objc(performScanning:)func performScanning(command : CDVInvokedUrlCommand) {
         
-        perform_Scanning()
+        self.perform_Scanning()
         let result = CDVPluginResult.init(status: CDVCommandStatus_OK)
         self.commandDelegate.send(result, callbackId: command.callbackId)
     }
     
     @objc(performDisconnection:)func performDisconnection(command : CDVInvokedUrlCommand) {
         
-        perform_Disconnection()
+        self.perform_Disconnection()
         let result = CDVPluginResult.init(status: CDVCommandStatus_OK)
         self.commandDelegate.send(result, callbackId: command.callbackId)
     }
     
     @objc(testNorecovery:)func testNorecovery(command : CDVInvokedUrlCommand) {
         
-        perform_TestNorecovery()
+        self.perform_TestNorecovery()
         let result = CDVPluginResult.init(status: CDVCommandStatus_OK)
         self.commandDelegate.send(result, callbackId: command.callbackId)
     }
     
     @objc(getDeviceFirmware:)func getDeviceFirmware(command : CDVInvokedUrlCommand) {
         
-        get_DeviceFirmware()
+        self.get_DeviceFirmware()
         let result = CDVPluginResult.init(status: CDVCommandStatus_OK)
         self.commandDelegate.send(result, callbackId: command.callbackId)
     }
     
     @objc(getDeviceSerialNumber:)func getDeviceSerialNumber(command : CDVInvokedUrlCommand) {
         
-        get_DeviceSerialNumber()
+        self.get_DeviceSerialNumber()
         let result = CDVPluginResult.init(status: CDVCommandStatus_OK)
         self.commandDelegate.send(result, callbackId: command.callbackId)
     }
@@ -131,7 +131,7 @@ class MSKBedfontPlugin: CDVPlugin {
             if didScanStart {
                 self.sendStateChangeEvents(eventName: self.BEDFONT_EVENT_SCANSTATECHANGE, boolval: true)
                 //self.log(message: "Scan was allowed to start.")
-                performConnect()
+                self.performConnect()
             }
         }
     }
