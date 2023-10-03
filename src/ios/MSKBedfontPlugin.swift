@@ -12,32 +12,32 @@ class MSKBedfontPlugin: CDVPlugin {
     fileprivate let BEDFONT_EVENT_RECOVERYCHANGE = "BEDFONT_EVENT_RECOVERYCHANGE"
     
     fileprivate let BEDFONT_EVENT_SCANSTATECHANGE = "OnScanStateChangeEvent"
-
+    
     fileprivate let BEDFONT_EVENT_CONNECTIONCHANGE = "OnConnectionChangeEvent"
-
+    
     fileprivate let BEDFONT_EVENT_CONNECTINGCHANGE = "OnCOnnectingChangeEvent"
-
+    
     fileprivate let BEDFONT_EVENT_BUTTONNAMECHANGE = "OnButtonNameChangeEvent"
-
+    
     fileprivate let BEDFONT_EVENT_CONNECT_RESULT = "OnConnectResultEvent"
-
+    
     fileprivate let BEDFONT_EVENT_SCAN_RESULT = "OnScanResultEvent"
-
+    
     fileprivate let BEDFONT_EVENT_DEVICE_USAGE = "onDeviceUsageEvent"
-
+    
     fileprivate let BEDFONT_EVENT_DEVICE_FIRMWARE = "onDeviceFirmwareEvent"
-
+    
     fileprivate let BEDFONT_EVENT_DEVICE_SERIALNUMBER = "onDeviceSerialNumberEvent"
-
-
-
+    
+    
+    
     fileprivate let SUCCESS = "SUCCESS"
     fileprivate let SUCCESS_NEEDS_RECOVERY = "SUCCESS_NEEDS_RECOVERY"
     fileprivate let ZEROING = "ZEROING"
     fileprivate let ERROR_FAILED_TO_FINALIZE = "ERROR_FAILED_TO_FINALIZE"
     fileprivate let ERROR_FAILED_TO_CONNECT = "ERROR_FAILED_TO_CONNECT"
     fileprivate let ERROR_SCAN_FAILED = "ERROR_SCAN_FAILED"
-
+    
     fileprivate let DEVICE_NOT_CONNECTED = "DEVICE_NOT_CONNECTED"
     
     
@@ -50,7 +50,7 @@ class MSKBedfontPlugin: CDVPlugin {
     
     var sensor: PeripheralIdentifier?
     var isConnectedText: String = "Disconnected"
-
+    
     
     @objc(init:)func init(command : CDVInvokedUrlCommand) {
         
@@ -108,7 +108,7 @@ class MSKBedfontPlugin: CDVPlugin {
     }
     
     
-
+    
     func perform_Scanning() {
         if smokerlyzerBluetooth != nil {
             let didScanStart = smokerlyzerBluetooth.scanForPeripheral(
@@ -251,9 +251,10 @@ class MSKBedfontPlugin: CDVPlugin {
         if let jsonString = String(data: jsonData, encoding: .utf8) {
             let jsCode = "cordova.fireDocumentEvent('\(eventName)', \(jsonString));"
             self.commandDelegate!.evalJs(jsCode)
-    }
+        }
         
-    
+        
+    }
 }
 
 
