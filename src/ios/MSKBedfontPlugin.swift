@@ -243,7 +243,9 @@ class MSKBedfontPlugin: CDVPlugin {
     }
     
     func sendDeviceDetails(eventName: String, deviceParam: String) {
-        
+        let eventData = [
+            "deviceDetail": deviceParam
+        ]
         
         fireEvent(eventName, eventData)
     }
