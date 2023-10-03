@@ -142,7 +142,7 @@ class MSKBedfontPlugin: CDVPlugin {
         let scanStarted = smokerlyzerBluetooth.scanForPeripheral(
             onDiscovery: { scan, _ in
                 //self.log(message: "Peripheral found, connecting...")
-                sendScanningEvents(connectResult: "ZEROING", logMessage: "Zeroing the sensor, please wait...")
+                self.sendScanningEvents(connectResult: "ZEROING", logMessage: "Zeroing the sensor, please wait...")
                 smokerlyzerBluetooth.connectToPeripheral(peripheral: scan.peripheralIdentifier, connected: {result in
                     switch result {
                     case .success(let peripheralId):
