@@ -5,8 +5,12 @@
     "cordova": {
         "id": "org.mskcc.bedfont",
         "platforms": [
-            "android"
-        ]
+            "android",
+            "ios"
+        ],
+        "plugins": {
+            "msk-bedfont-plugin": {}
+        }
     },
     "keywords": [
         "ecosystem:cordova"
@@ -14,6 +18,8 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "cordova-android": "^7.1.4"
+        "cordova-android": "^7.1.4",
+        "cordova-ios": "^4.5.5",
+        "msk-bedfont-plugin": "1"
     }
 }
