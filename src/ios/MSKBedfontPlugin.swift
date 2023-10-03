@@ -55,7 +55,7 @@ class MSKBedfontPlugin: CDVPlugin {
     var isEnabled: Bool = false
     
     
-    @objc(init:)func initialize(command : CDVInvokedUrlCommand) {
+    @objc(initialize:)func initialize(command : CDVInvokedUrlCommand) {
         
         if(!initialized) {
             smokerlyzerBluetooth = SmokerlyzerBluetooth()
