@@ -219,14 +219,14 @@ class MSKBedfontPlugin: CDVPlugin {
     }
     
     func sendStateChangeEvents(eventName: String, boolval: Bool) {
-        let eventData = [
+        let eventData: [String: Any] = [
             "changeState": boolval
         ]
         fireEvent(eventName: eventName, eventData: eventData )
     }
     
     func sendScanningEvents(connectResult: String, logMessage: String) {
-        let eventData = [
+        let eventData: [String: Any] = [
             "connectResult": connectResult,
             "logMessage": logMessage
         ]
@@ -234,7 +234,7 @@ class MSKBedfontPlugin: CDVPlugin {
     }
     
     func sendScanningResults(statusName: String, ppm: Int, isSuccessful: Bool) {
-        let eventData = [
+        let eventData: [String: Any] = [
             "statusName": statusName,
             "ppm": ppm,
             "isSuccessful": isSuccessful
@@ -243,7 +243,7 @@ class MSKBedfontPlugin: CDVPlugin {
     }
     
     func sendDeviceDetails(eventName: String, deviceParam: String) {
-        let eventData = [
+        let eventData: [String: Any] = [
             "deviceDetail": deviceParam
         ]
         
@@ -251,12 +251,19 @@ class MSKBedfontPlugin: CDVPlugin {
     }
     
     func fireEvent(eventName: String, eventData: [String: Any]) {
-        let jsonData = try JSONSerialization.data(withJSONObject: eventData, options: [])
-        if let jsonString = String(data: jsonData, encoding: .utf8) {
-            let jsCode = "cordova.fireDocumentEvent('\(eventName)', \(jsonString));"
-            self.commandDelegate!.evalJs(jsCode)
-        }
         
+        do {
+            // Convert the dictionary to JSON data
+            let jsonData = try JSONSerialization.data(withJSONObject: eventData, options: [])
+            
+            // Print the JSON data as a string (for demonstration purposes)
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                let jsCode = "cordova.fireDocumentEvent('\(eventName)', \(jsonString));"
+                self.commandDelegate!.evalJs(jsCode)
+            }
+        } catch {
+            
+        }
         
     }
 }
