@@ -291,12 +291,12 @@ extension MSKBedfontPlugin: ConnectionObserver {
         //log(message: "[connection observer] detected connect event")
         sensor = peripheral
         isConnectedText = "Connected"
-        self.sendStateChangeEvents(commandDelegate: myCommandDelegate, eventName: self.BEDFONT_EVENT_BUTTONNAMECHANGE, boolval: true)
+        //self.sendStateChangeEvents(commandDelegate: myCommandDelegate, eventName: self.BEDFONT_EVENT_BUTTONNAMECHANGE, boolval: true)
     }
 
     func disconnected(from peripheral: PeripheralIdentifier) {
         //log(message: "[connection observer] detected disconnect event")
         isConnectedText = "Disconnected"
-        self.sendStateChangeEvents(commandDelegate: myCommandDelegate, eventName: self.BEDFONT_EVENT_BUTTONNAMECHANGE, boolval: false)
+        //self.sendStateChangeEvents(commandDelegate: myCommandDelegate, eventName: self.BEDFONT_EVENT_BUTTONNAMECHANGE, boolval: false)
     }
 }
