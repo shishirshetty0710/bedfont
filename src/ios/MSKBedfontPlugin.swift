@@ -118,15 +118,15 @@ class MSKBedfontPlugin: CDVPlugin {
                 onStopped: {_, error in
                     if let error = error {
                         //self.log(message: "Scan error: " + error.localizedDescription)
-                        sendStateChangeEvents(BEDFONT_EVENT_SCANSTATECHANGE, false)
+                        sendStateChangeEvents(eventName: BEDFONT_EVENT_SCANSTATECHANGE, boolval: false)
                     } else {
-                        sendStateChangeEvents(BEDFONT_EVENT_SCANSTATECHANGE, false)
+                        sendStateChangeEvents(eventName: BEDFONT_EVENT_SCANSTATECHANGE, boolval: false)
                         //self.log(message: "Scan stopped.")
                     }
                 }
             )
             if didScanStart {
-                sendStateChangeEvents(BEDFONT_EVENT_SCANSTATECHANGE, true)
+                sendStateChangeEvents(eventName: BEDFONT_EVENT_SCANSTATECHANGE, boolval: true)
                 //self.log(message: "Scan was allowed to start.")
                 performConnect()
             }
@@ -139,19 +139,19 @@ class MSKBedfontPlugin: CDVPlugin {
         let scanStarted = smokerlyzerBluetooth.scanForPeripheral(
             onDiscovery: { scan, _ in
                 //self.log(message: "Peripheral found, connecting...")
-                sendScanningEvents("ZEROING","Zeroing the sensor, please wait...")
+                sendScanningEvents(connectResult: "ZEROING", logMessage: "Zeroing the sensor, please wait...")
                 smokerlyzerBluetooth.connectToPeripheral(peripheral: scan.peripheralIdentifier, connected: {result in
                     switch result {
                     case .success(let peripheralId):
                         //self.log(message: "Successfully connected to " + peripheralId.name)
                         self.isConnectedText = "Connected"
-                        sendScanningEvents("SUCCESS", "Successfully connected to " + peripheralId.name)
-                        sendStateChangeEvents(BEDFONT_EVENT_BUTTONNAMECHANGE, true)
+                        sendScanningEvents(connectResult: "SUCCESS", logMessage: "Successfully connected to " + peripheralId.name)
+                        sendStateChangeEvents(eventName: BEDFONT_EVENT_BUTTONNAMECHANGE, boolval: true)
                     case .failure(let error):
                         //self.log(message: "Failed to connect with error: \(error.localizedDescription)")
                         self.isConnectedText = "Disconnected"
-                        sendScanningEvents("ERROR_FAILED_TO_CONNECT", "Failed to connect with error: \(error.localizedDescription)")
-                        sendStateChangeEvents(BEDFONT_EVENT_BUTTONNAMECHANGE, false)
+                        sendScanningEvents(connectResult: "ERROR_FAILED_TO_CONNECT", logMessage: "Failed to connect with error: \(error.localizedDescription)")
+                        sendStateChangeEvents(eventName: BEDFONT_EVENT_BUTTONNAMECHANGE, boolval: false)
                     }
                 })
             },
@@ -166,7 +166,7 @@ class MSKBedfontPlugin: CDVPlugin {
     }
     
     func perform_Disconnection() {
-        sendStateChangeEvents(BEDFONT_EVENT_BUTTONNAMECHANGE, false)
+        sendStateChangeEvents(eventName: BEDFONT_EVENT_BUTTONNAMECHANGE, boolval: false)
         self.isEnabled = false
         if smokerlyzerBluetooth != nil {
             smokerlyzerBluetooth.disconnectFromPeripheral()
@@ -179,10 +179,10 @@ class MSKBedfontPlugin: CDVPlugin {
                 switch result {
                 case .success(let ppm):
                     //self.log(message: "PPM value is " + String(ppm.reading))
-                    sendScanningResults("PPM value is " + String(ppm.reading), ppm.reading, true)
+                    sendScanningResults(statusName: "PPM value is " + String(ppm.reading), ppm: ppm.reading, isSuccessful: true)
                 case .failure(let error):
                     //self.log(message: "Error: " + error.localizedDescription)
-                    sendScanningResults("Error: " + error.localizedDescription, -1, false)
+                    sendScanningResults(statusName: "Error: " + error.localizedDescription, ppm: -1, isSuccessful: false)
                 }
             })
         }
@@ -194,10 +194,10 @@ class MSKBedfontPlugin: CDVPlugin {
                 switch result {
                 case .success(let firmware):
                     //self.log(message: "Firmware version: " + firmware.version)
-                    sendDeviceDetails(BEDFONT_EVENT_DEVICE_FIRMWARE, firmware.version)
+                    sendDeviceDetails(eventName: BEDFONT_EVENT_DEVICE_FIRMWARE, deviceParam: firmware.version)
                 case .failure(let error):
                     //self.log(message: "Error: " + error.localizedDescription)
-                    sendDeviceDetails(BEDFONT_EVENT_DEVICE_FIRMWARE, "Error: " + error.localizedDescription)
+                    sendDeviceDetails(eventName: BEDFONT_EVENT_DEVICE_FIRMWARE, deviceParam: "Error: " + error.localizedDescription)
                 }
             })
         }
@@ -209,10 +209,10 @@ class MSKBedfontPlugin: CDVPlugin {
                 switch result {
                 case .success(let serial):
                     //self.log(message: "Serial number: " + serial.serial)
-                    sendDeviceDetails(BEDFONT_EVENT_DEVICE_SERIALNUMBER, serial.serial)
+                    sendDeviceDetails(eventName: BEDFONT_EVENT_DEVICE_SERIALNUMBER, deviceParam: serial.serial)
                 case .failure(let error):
                     //self.log(message: "Error: " + error.localizedDescription)
-                    sendDeviceDetails(BEDFONT_EVENT_DEVICE_SERIALNUMBER, "Error: " + error.localizedDescription)
+                    sendDeviceDetails(eventName: BEDFONT_EVENT_DEVICE_SERIALNUMBER, deviceParam: "Error: " + error.localizedDescription)
                 }
             })
         }
@@ -222,7 +222,7 @@ class MSKBedfontPlugin: CDVPlugin {
         let eventData = [
             "changeState": boolval
         ]
-        fireEvent(eventName, eventData)
+        fireEvent(eventName: eventName, eventData: eventData )
     }
     
     func sendScanningEvents(connectResult: String, logMessage: String) {
@@ -230,7 +230,7 @@ class MSKBedfontPlugin: CDVPlugin {
             "connectResult": connectResult,
             "logMessage": logMessage
         ]
-        fireEvent(BEDFONT_EVENT_SCAN_RESULT, eventData)
+        fireEvent(eventName: BEDFONT_EVENT_SCAN_RESULT, eventData: eventData)
     }
     
     func sendScanningResults(statusName: String, ppm: Int, isSuccessful: Bool) {
@@ -239,7 +239,7 @@ class MSKBedfontPlugin: CDVPlugin {
             "ppm": ppm,
             "isSuccessful": isSuccessful
         ]
-        fireEvent(BEDFONT_EVENT_CONNECT_RESULT, eventData)
+        fireEvent(eventName: BEDFONT_EVENT_CONNECT_RESULT, eventData: eventData)
     }
     
     func sendDeviceDetails(eventName: String, deviceParam: String) {
@@ -247,7 +247,7 @@ class MSKBedfontPlugin: CDVPlugin {
             "deviceDetail": deviceParam
         ]
         
-        fireEvent(eventName, eventData)
+        fireEvent(eventName: eventName, eventData: eventData)
     }
     
     func fireEvent(eventName: String, eventData: [String: Any]) {
@@ -271,12 +271,12 @@ extension MSKBedfontPlugin: ConnectionObserver {
         //log(message: "[connection observer] detected connect event")
         sensor = peripheral
         isConnectedText = "Connected"
-        sendStateChangeEvents(BEDFONT_EVENT_BUTTONNAMECHANGE, true)
+        sendStateChangeEvents(eventName: BEDFONT_EVENT_BUTTONNAMECHANGE, boolval: true)
     }
 
     func disconnected(from peripheral: PeripheralIdentifier) {
         //log(message: "[connection observer] detected disconnect event")
         isConnectedText = "Disconnected"
-        sendStateChangeEvents(BEDFONT_EVENT_BUTTONNAMECHANGE, false)
+        sendStateChangeEvents(eventName: BEDFONT_EVENT_BUTTONNAMECHANGE, boolval: false)
     }
 }
