@@ -7,7 +7,7 @@ import Foundation
 import SmokerlyzerSDK
 
 
-let smokerlyzerBluetooth = SmokerlyzerBluetooth()
+var smokerlyzerBluetooth = SmokerlyzerBluetooth()
 
 @objc(MSKBedfontPlugin)
 class MSKBedfontPlugin: CDVPlugin {
