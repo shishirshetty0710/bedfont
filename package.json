@@ -4,22 +4,11 @@
     "description": "Bedfont SDK with Cordova Wrapper for iOS and Android",
     "cordova": {
         "id": "org.mskcc.bedfont",
-        "platforms": [
-            "android",
-            "ios"
-        ],
-        "plugins": {
-            "msk-bedfont-plugin": {}
-        }
+        "platforms": []
     },
     "keywords": [
         "ecosystem:cordova"
     ],
     "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "cordova-android": "^7.1.4",
-        "cordova-ios": "^4.5.5",
-        "msk-bedfont-plugin": "1"
-    }
+    "license": "ISC"
 }
