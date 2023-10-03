@@ -11,6 +11,9 @@
         <clobbers target="cordova.plugins.bedfont" />
     </js-module>
 
+
+    <preference name="NSBLUETOOTHALWAYSUSAGEDESCRIPTION" default="Need bluetooth to communicate with devices nearby"/>
+
     <platform name="android">
         <config-file parent="/*" target="res/xml/config.xml">
             <feature name="MSKBedfontPlugin">
@@ -50,5 +53,26 @@
 
         <dependency id="cordova-custom-config" version="^5.1.1" />
     </platform>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="MSKBedfontPlugin">
+                <param name="ios-package" value="MSKBedfontPlugin"/>
+            </feature>
+        </config-file>
+        <preference name="UseSwiftLanguageVersion"/>
+        <dependency id="cordova-plugin-add-swift-support" version="2.0.2"/>
+
+        <source-file src="src/ios/MSKBedfontPlugin.swift" />
+
+        <!-- SDK files -->
+        <framework src="src/ios/libs/SmokerlyzerSDK.xcframework" embed="true" custom="true" />
+        <!-- END SDK files -->
+
+        <config-file target="*-Info.plist" parent="NSBluetoothAlwaysUsageDescription">
+            <string>$NSBLUETOOTHALWAYSUSAGEDESCRIPTION</string>
+        </config-file>
+    </platform>
+
 
 </plugin>
