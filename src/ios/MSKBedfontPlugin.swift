@@ -263,7 +263,7 @@ class MSKBedfontPlugin: CDVPlugin {
            // if let jsonString = String(data: jsonData, encoding: .utf8) {
              //   let jsCode = "cordova.fireDocumentEvent('\(eventName)', \(jsonString));"
                // self.commandDelegate!.evalJs(jsCode)
-            }
+            //}
         } catch {
             
         }
