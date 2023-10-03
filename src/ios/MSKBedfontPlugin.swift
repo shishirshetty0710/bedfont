@@ -52,7 +52,7 @@ class MSKBedfontPlugin: CDVPlugin {
     var isConnectedText: String = "Disconnected"
     
     
-    @objc(init:)func init(command : CDVInvokedUrlCommand) {
+    @objc(init:)func initialize(command : CDVInvokedUrlCommand) {
         
         if(!initialized) {
             smokerlyzerBluetooth = SmokerlyzerBluetooth()
@@ -258,7 +258,7 @@ class MSKBedfontPlugin: CDVPlugin {
 }
 
 
-extension SensorViewController: ConnectionObserver {
+extension MSKBedfontPlugin: ConnectionObserver {
     func bluetoothAvailable(_ available: Bool) {
         log(message: "Bluetooth available: \(available)")
     }

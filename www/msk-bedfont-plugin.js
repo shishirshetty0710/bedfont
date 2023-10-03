@@ -2,7 +2,7 @@ var exec = require('cordova/exec');
 
 module.exports = {
 
-    init: function(success, error) {
+    initialize: function(success, error) {
         exec(success, error, 'MSKBedfontPlugin', 'init');
     },
     dispose: function(success, error) {

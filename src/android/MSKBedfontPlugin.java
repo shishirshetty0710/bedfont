@@ -85,7 +85,7 @@ public class MSKBedfontPlugin extends CordovaPlugin {
 
         switch (action) {
 
-            case "init":
+            case "initialize":
                 if(!initialized) {
                     initSDK();
                     initialized=true;
