@@ -283,9 +283,7 @@ class MSKBedfontPlugin: CDVPlugin {
         let jsCode = "cordova.fireDocumentEvent('\(eventName)', \(eventData))"
             
             // Execute the JavaScript code to trigger the event
-        commandDelegate.evalJs(jsCode, scheduledOnRunLoop: .main) { (result) in
-                // Handle the result if needed
-        }
+        commandDelegate.evalJs(jsCode)
         
     }
 }
