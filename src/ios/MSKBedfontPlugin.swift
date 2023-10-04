@@ -271,7 +271,8 @@ class MSKBedfontPlugin: CDVPlugin {
 
             // Print the JSON data as a string (for demonstration purposes)
             if let jsonString = String(data: jsonData, encoding: .utf8) {
-                let jsCode = "cordova.fireDocumentEvent('OnButtonNameChangeEvent', {\"changeState\":true})"
+                //let jsCode = "cordova.fireDocumentEvent('OnButtonNameChangeEvent', \(jsonString)"
+                let jsCode = "cordova.fireDocumentEvent('" + eventName + "',"+ jsonString + ")"
                 commandDelegate.evalJs(jsCode)
             }
         } catch {
