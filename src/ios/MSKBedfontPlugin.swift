@@ -265,18 +265,20 @@ class MSKBedfontPlugin: CDVPlugin {
     
     func fireEvent(commandDelegate: CDVCommandDelegate, eventName: String, eventData: [String: Any]) {
         
-        do {
-            // Convert the dictionary to JSON data
-            let jsonData = try JSONSerialization.data(withJSONObject: eventData, options: [])
-            
-            // Print the JSON data as a string (for demonstration purposes)
-            if let jsonString = String(data: jsonData, encoding: .utf8) {
-                let jsCode = "cordova.fireDocumentEvent('\(eventName)', \(jsonString));"
-                //commandDelegate.evalJs(jsCode)
-            }
-        } catch {
-            
-        }
+        let jsCode = "cordova.fireDocumentEvent('\(eventName)', \(eventData));"
+        commandDelegate.evalJs(jsCode, completionHandler: nil)
+//        do {
+//            // Convert the dictionary to JSON data
+//            let jsonData = try JSONSerialization.data(withJSONObject: eventData, options: [])
+//
+//            // Print the JSON data as a string (for demonstration purposes)
+//            if let jsonString = String(data: jsonData, encoding: .utf8) {
+//                let jsCode = "cordova.fireDocumentEvent('\(eventName)', \(jsonString));"
+//                commandDelegate.evalJs(jsCode)
+//            }
+//        } catch {
+//
+//        }
         
     }
 }
