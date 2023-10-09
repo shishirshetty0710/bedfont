@@ -160,7 +160,7 @@ class MSKBedfontPlugin: CDVPlugin {
         
         
         
-        
+         
         
 //        if smokerlyzerBluetooth != nil {
 //            let didScanStart = smokerlyzerBluetooth.scanForPeripheral(

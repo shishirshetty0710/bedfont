@@ -1,0 +1,299 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)
+// swift-module-flags: -target arm64-apple-ios10.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name SmokerlyzerSDK
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import CoreBluetooth
+import Foundation
+import Swift
+import UIKit
+import _Concurrency
+import _StringProcessing
+public struct Firmware : SmokerlyzerSDK.Characteristic {
+  public var versionNumber: Swift.Int {
+    get
+  }
+  public var version: Swift.String {
+    get
+  }
+  public static func identifier() -> SmokerlyzerSDK.CharacteristicIdentifier
+}
+extension Swift.BinaryInteger {
+  public func toBluetoothData() -> Foundation.Data
+  public init(bluetoothData: Foundation.Data)
+}
+extension CoreBluetooth.CBPeripheral {
+  public func service(with uuid: CoreBluetooth.CBUUID) -> CoreBluetooth.CBService?
+}
+extension CoreBluetooth.CBService {
+  public func characteristic(with uuid: CoreBluetooth.CBUUID) -> CoreBluetooth.CBCharacteristic?
+}
+@available(iOS 10.0, *)
+extension CoreBluetooth.CBManagerState {
+  public func string() -> Swift.String
+}
+public enum RecoveryResult {
+  case success
+  case failure(Swift.Error)
+}
+public enum ReadResult<R> {
+  case success(R)
+  case failure(Swift.Error)
+}
+@_hasMissingDesignatedInitializers public class PPMResult {
+  public var latest: Swift.Int {
+    get
+  }
+  public var state: SmokerlyzerSDK.PPMResult.State {
+    get
+  }
+  public enum State {
+    case running
+    case finished
+    case stopped
+    public static func == (a: SmokerlyzerSDK.PPMResult.State, b: SmokerlyzerSDK.PPMResult.State) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  @objc deinit
+}
+public struct ScanDiscovery {
+  public let peripheralIdentifier: SmokerlyzerSDK.PeripheralIdentifier
+  public let advertisementPacket: [Swift.String : Any]
+  public let rssi: Swift.Int
+}
+public struct Zeroing : SmokerlyzerSDK.Characteristic {
+  public var isEnabled: Swift.Bool {
+    get
+  }
+  public static func identifier() -> SmokerlyzerSDK.CharacteristicIdentifier
+}
+public protocol RecoveryObserver : AnyObject {
+  func inRecovery(_ recoveryState: Swift.Bool)
+}
+public enum ConnectionResult {
+  case success(SmokerlyzerSDK.PeripheralIdentifier)
+  case failure(Swift.Error)
+}
+public struct Serial : SmokerlyzerSDK.Characteristic {
+  public var serial: Swift.String {
+    get
+  }
+  public static func identifier() -> SmokerlyzerSDK.CharacteristicIdentifier
+}
+public struct PPM : SmokerlyzerSDK.Characteristic {
+  public var reading: Swift.Int {
+    get
+  }
+  public static func identifier() -> SmokerlyzerSDK.CharacteristicIdentifier
+}
+extension Swift.String {
+  public init(bluetoothData: Foundation.Data)
+  public func toBluetoothData() -> Foundation.Data
+}
+public struct ServiceIdentifier {
+  public var uuid: CoreBluetooth.CBUUID {
+    get
+  }
+  public init(uuid: Swift.String)
+  public init(uuid: CoreBluetooth.CBUUID)
+}
+extension SmokerlyzerSDK.ServiceIdentifier : Swift.Hashable {
+  public static func == (lhs: SmokerlyzerSDK.ServiceIdentifier, rhs: SmokerlyzerSDK.ServiceIdentifier) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum WriteResult {
+  case success
+  case failure(Swift.Error)
+}
+public enum ConnectionUpdate {
+  case success(SmokerlyzerSDK.PeripheralIdentifier)
+  case successNeedsRecovery(SmokerlyzerSDK.PeripheralIdentifier)
+  case zeroing
+  case failure(Swift.Error)
+}
+public class SmokerlyzerBluetooth {
+  public init()
+  @available(*, deprecated, message: "Use scanAndConnect instead as it contains connection process updates ")
+  public func scanForPeripheral(scanTimeout: Foundation.TimeInterval = 10, withNames: [Swift.String] = ["Compact", "iCOquit"], stopOnFirstResult: Swift.Bool = true, onDiscovery: @escaping (SmokerlyzerSDK.ScanDiscovery, [SmokerlyzerSDK.ScanDiscovery]) -> Swift.Void, onStopped: @escaping ([SmokerlyzerSDK.ScanDiscovery], Swift.Error?) -> Swift.Void) -> Swift.Bool
+  public func scanAndConnect(deviceNames: [Swift.String] = ["Compact", "iCOquit"], connected: @escaping (SmokerlyzerSDK.ConnectionUpdate) -> Swift.Void) -> Swift.Bool
+  @available(*, deprecated, message: "Use scanAndConnect instead as it contains connection process updates")
+  public func connectToPeripheral(peripheral: SmokerlyzerSDK.PeripheralIdentifier, connectTimeout: Foundation.TimeInterval = 2, connected: @escaping (SmokerlyzerSDK.ConnectionResult) -> Swift.Void)
+  @available(*, deprecated, message: "Use disconnect instead")
+  public func stopScanning()
+  @available(*, deprecated, renamed: "disconnect")
+  public func disconnectFromPeripheral(force: Swift.Bool = false)
+  public func disconnect(force: Swift.Bool = false)
+  public func register(connectionObserver: SmokerlyzerSDK.ConnectionObserver)
+  public func unregister(connectionObserver: SmokerlyzerSDK.ConnectionObserver)
+  public func register(recoveryObserver: SmokerlyzerSDK.RecoveryObserver)
+  public func unregister(recoveryObserver: SmokerlyzerSDK.RecoveryObserver)
+  public func forwardLogs(callback: @escaping (Swift.String) -> Swift.Void)
+  @available(*, deprecated, message: "Use enableSensor and disableSensor")
+  public func setSensorState(enabled: Swift.Bool, callback: @escaping (SmokerlyzerSDK.WriteResult) -> Swift.Void)
+  public func enableSensor(callback: @escaping (SmokerlyzerSDK.WriteResult) -> Swift.Void)
+  public func disableSensor(callback: @escaping (SmokerlyzerSDK.WriteResult) -> Swift.Void)
+  @available(*, deprecated, renamed: "getBatteryReading")
+  public func getBatteryLife(callback: @escaping (SmokerlyzerSDK.ReadResult<SmokerlyzerSDK.Battery>) -> Swift.Void)
+  public func getBatteryReading(callback: @escaping (SmokerlyzerSDK.ReadResult<SmokerlyzerSDK.Battery>) -> Swift.Void)
+  @available(*, deprecated, message: "Use startBreathTest or startBreathTestNoRecovery")
+  public func getCoppm(callback: @escaping (SmokerlyzerSDK.ReadResult<SmokerlyzerSDK.PPM>) -> Swift.Void)
+  public func getFirmwareVersion(callback: @escaping (SmokerlyzerSDK.ReadResult<SmokerlyzerSDK.Firmware>) -> Swift.Void)
+  public func getDeviceName(callback: @escaping (Swift.String) -> Swift.Void)
+  @available(*, deprecated, renamed: "getSerialNumber")
+  public func getSerial(callback: @escaping (SmokerlyzerSDK.ReadResult<SmokerlyzerSDK.Serial>) -> Swift.Void)
+  public func getSerialNumber(callback: @escaping (SmokerlyzerSDK.ReadResult<SmokerlyzerSDK.Serial>) -> Swift.Void)
+  public func getTemperature(callback: @escaping (SmokerlyzerSDK.ReadResult<SmokerlyzerSDK.Temperature>) -> Swift.Void)
+  @available(*, deprecated, renamed: "getUsage")
+  public func getUsageCount(callback: @escaping (SmokerlyzerSDK.ReadResult<SmokerlyzerSDK.Usage>) -> Swift.Void)
+  public func getUsage(callback: @escaping (SmokerlyzerSDK.ReadResult<SmokerlyzerSDK.Usage>) -> Swift.Void)
+  @available(*, deprecated, message: "Use startBreathTest or startBreathTestNoRecovery")
+  public func setNotifyCoPPM(listening: Swift.Bool, callback: @escaping (SmokerlyzerSDK.ReadResult<SmokerlyzerSDK.PPM>) -> Swift.Void = { _ in })
+  public func handleRecovery(callback: @escaping (SmokerlyzerSDK.RecoveryResult) -> Swift.Void)
+  public func startBreathTest(callback: @escaping (SmokerlyzerSDK.ReadResult<SmokerlyzerSDK.PPMResult>) -> Swift.Void)
+  public func startBreathTestNoRecovery(callback: @escaping (SmokerlyzerSDK.ReadResult<SmokerlyzerSDK.PPMResult>) -> Swift.Void)
+  public func stopBreathTest(onComplete: @escaping () -> Swift.Void = {})
+  public func getIsConnected(callback: @escaping (Swift.Bool) -> Swift.Void)
+  @objc deinit
+}
+extension Foundation.Data {
+  public func extract<T>(start: Swift.Int, length: Swift.Int) throws -> T
+}
+public struct Battery : SmokerlyzerSDK.Characteristic {
+  public var millivolts: Swift.Int {
+    get
+  }
+  public var volts: Swift.Double {
+    get
+  }
+  public static func identifier() -> SmokerlyzerSDK.CharacteristicIdentifier
+}
+public enum BluejayError {
+  case bluetoothUnavailable
+  case multipleScanNotSupported
+  case multipleConnectNotSupported
+  case multipleDisconnectNotSupported
+  case connectionTimedOut
+  case notConnected
+  case missingService(SmokerlyzerSDK.ServiceIdentifier)
+  case missingCharacteristic(SmokerlyzerSDK.CharacteristicIdentifier)
+  case cancelled
+  case explicitDisconnect
+  case unexpectedDisconnect
+  case disconnectQueued
+  case listenTimedOut
+  case readFailed
+  case writeFailed
+  case missingData
+  case dataOutOfBounds(start: Swift.Int, length: Swift.Int, count: Swift.Int)
+  case unexpectedPeripheral(SmokerlyzerSDK.PeripheralIdentifier)
+  case allowDuplicatesInBackgroundNotSupported
+  case missingServiceIdentifiersInBackground
+  case backgroundTaskRunning
+  case multipleBackgroundTaskNotSupported
+  case indefiniteFlush
+  case stopped
+  case backgroundRestorationInProgress
+  case startupBackgroundTaskExpired
+  case multipleListenTrapped
+  case multipleListenReplaced
+  case failedToRecover
+  case zeroingRequired
+  case failedToFinalize
+  case scanFailed
+  case deviceNotReady
+  @available(*, deprecated, message: "No longer emitted, as breath test now succeeds after the maximum amount of time has elapsed.")
+  case failedToStabilize
+}
+extension SmokerlyzerSDK.BluejayError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+extension SmokerlyzerSDK.BluejayError : Foundation.CustomNSError {
+  public static var errorDomain: Swift.String {
+    get
+  }
+  public var errorCode: Swift.Int {
+    get
+  }
+  public var errorUserInfo: [Swift.String : Any] {
+    get
+  }
+}
+public protocol Characteristic {
+  static func identifier() -> SmokerlyzerSDK.CharacteristicIdentifier
+}
+public struct Temperature : SmokerlyzerSDK.Characteristic {
+  public var reading: Swift.Double {
+    get
+  }
+  public static func identifier() -> SmokerlyzerSDK.CharacteristicIdentifier
+}
+public struct CharacteristicIdentifier {
+  public let service: SmokerlyzerSDK.ServiceIdentifier
+  public let uuid: CoreBluetooth.CBUUID
+  public init?(_ cbCharacteristic: CoreBluetooth.CBCharacteristic)
+  public var description: Swift.String {
+    get
+  }
+  public init(uuid: Swift.String, service: SmokerlyzerSDK.ServiceIdentifier)
+  public init(uuid: CoreBluetooth.CBUUID, service: SmokerlyzerSDK.ServiceIdentifier)
+  public static func == (lhs: SmokerlyzerSDK.CharacteristicIdentifier, rhs: CoreBluetooth.CBCharacteristic) -> Swift.Bool
+}
+extension SmokerlyzerSDK.CharacteristicIdentifier : Swift.Hashable {
+  public static func == (lhs: SmokerlyzerSDK.CharacteristicIdentifier, rhs: SmokerlyzerSDK.CharacteristicIdentifier) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension Foundation.Data {
+  public func toBluetoothData() -> Foundation.Data
+}
+extension Foundation.Data {
+  public init(bluetoothData: Foundation.Data)
+}
+extension CoreBluetooth.CBPeripheralState {
+  public func string() -> Swift.String
+}
+public struct CoEnable : SmokerlyzerSDK.Characteristic {
+  public static func identifier() -> SmokerlyzerSDK.CharacteristicIdentifier
+}
+public struct Usage : SmokerlyzerSDK.Characteristic {
+  public var count: Swift.Int {
+    get
+  }
+  public static func identifier() -> SmokerlyzerSDK.CharacteristicIdentifier
+}
+public protocol ConnectionObserver : AnyObject {
+  func bluetoothAvailable(_ available: Swift.Bool)
+  func connected(to peripheral: SmokerlyzerSDK.PeripheralIdentifier)
+  func disconnected(from peripheral: SmokerlyzerSDK.PeripheralIdentifier)
+}
+extension SmokerlyzerSDK.ConnectionObserver {
+  public func bluetoothAvailable(_ available: Swift.Bool)
+  public func connected(to peripheral: SmokerlyzerSDK.PeripheralIdentifier)
+  public func disconnected(from peripheral: SmokerlyzerSDK.PeripheralIdentifier)
+}
+public struct PeripheralIdentifier {
+  public let uuid: Foundation.UUID
+  public let name: Swift.String
+  public var description: Swift.String {
+    get
+  }
+  public init(uuid: Foundation.UUID, name: Swift.String?)
+}
+extension SmokerlyzerSDK.PeripheralIdentifier : Swift.Hashable {
+  public static func == (lhs: SmokerlyzerSDK.PeripheralIdentifier, rhs: SmokerlyzerSDK.PeripheralIdentifier) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension SmokerlyzerSDK.PPMResult.State : Swift.Equatable {}
+extension SmokerlyzerSDK.PPMResult.State : Swift.Hashable {}
