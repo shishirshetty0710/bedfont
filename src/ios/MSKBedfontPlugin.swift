@@ -125,33 +125,33 @@ class MSKBedfontPlugin: CDVPlugin {
     func perform_Scanning(commandDelegate: CDVCommandDelegate) {
         if smokerlyzerBluetooth != nil {
             let deviceList = ["iCOquit"]
-            smokerlyzerBluetooth.scanAndConnect(deviceNames: deviceList, connected: { update in
+            smokerlyzerBluetooth.scanAndConnect(deviceNames: deviceList, connected: {update in
             switch update {
-            case .success(let peripheralId):
-                //self.log(message: "Successfully connected to " + peripheralId.name)
-                //self.isConnectedText = "Connected"
-                self.sendScanningEvents(commandDelegate: commandDelegate, connectResult: "SUCCESS", logMessage: "Finalized connection. Device is READY")
-            case .successNeedsRecovery(let peripheralId):
-                //self.log(message: "Connected to " + peripheralId.name + ". Recovery is needed before starting breath test.")
-                //self.isConnectedText = "Connected"
-                self.sendScanningEvents(commandDelegate: commandDelegate, connectResult: "SUCCESS_NEEDS_RECOVERY", logMessage: "Finalized connection. Recovery function needs to be run on the sensor")
-            case .zeroing:
-                //self.log(message: "Device is zeroing, please wait")
-                self.sendScanningEvents(commandDelegate: commandDelegate, connectResult: "ZEROING", logMessage: "Zeroing the sensor, please wait...")
-            case .failure(let error):
-                if let error = error as? BluejayError {
-                    switch error{
-                    case .scanFailed:
-                        //self.log(message: "Scanning failed to pick up a device")
-                        self.sendScanningEvents(commandDelegate: commandDelegate, connectResult: "ERROR_SCAN_FAILED", logMessage: "Failed to find device")
-                    case .connectionTimedOut:
-                        //self.log(message: "Failed to connect to device")
-                        self.sendScanningEvents(commandDelegate: commandDelegate, connectResult: "ERROR_FAILED_TO_CONNECT", logMessage: "Failed to connect to device")
-                    default:
-                        //self.log(message: "Error: " + error.localizedDescription)
-                        self.sendScanningEvents(commandDelegate: commandDelegate, connectResult: "ERROR_SCAN_FAILED", logMessage: "Failed to find device")
-                    }
-                }
+                    case .success(let peripheralId):
+                        //self.log(message: "Successfully connected to " + peripheralId.name)
+                        //self.isConnectedText = "Connected"
+                        self.sendScanningEvents(commandDelegate: commandDelegate, connectResult: "SUCCESS", logMessage: "Finalized connection. Device is READY")
+                    case .successNeedsRecovery(let peripheralId):
+                        //self.log(message: "Connected to " + peripheralId.name + ". Recovery is needed before starting breath test.")
+                        //self.isConnectedText = "Connected"
+                        self.sendScanningEvents(commandDelegate: commandDelegate, connectResult: "SUCCESS_NEEDS_RECOVERY", logMessage: "Finalized connection. Recovery function needs to be run on the sensor")
+                    case .zeroing:
+                        //self.log(message: "Device is zeroing, please wait")
+                        self.sendScanningEvents(commandDelegate: commandDelegate, connectResult: "ZEROING", logMessage: "Zeroing the sensor, please wait...")
+                    case .failure(let error):
+                        if let error = error as? BluejayError {
+                            switch error{
+                            case .scanFailed:
+                                //self.log(message: "Scanning failed to pick up a device")
+                                self.sendScanningEvents(commandDelegate: commandDelegate, connectResult: "ERROR_SCAN_FAILED", logMessage: "Failed to find device")
+                            case .connectionTimedOut:
+                                //self.log(message: "Failed to connect to device")
+                                self.sendScanningEvents(commandDelegate: commandDelegate, connectResult: "ERROR_FAILED_TO_CONNECT", logMessage: "Failed to connect to device")
+                            default:
+                                //self.log(message: "Error: " + error.localizedDescription)
+                                self.sendScanningEvents(commandDelegate: commandDelegate, connectResult: "ERROR_SCAN_FAILED", logMessage: "Failed to find device")
+                            }
+                        }
                 //self.isConnectedText = "Disconnected"
             }
         })
