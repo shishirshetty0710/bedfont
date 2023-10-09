@@ -124,7 +124,7 @@ class MSKBedfontPlugin: CDVPlugin {
     
     func perform_Scanning(commandDelegate: CDVCommandDelegate) {
         if smokerlyzerBluetooth != nil {
-            smokerlyzerBluetooth.scanAndConnect{ update in
+            smokerlyzerBluetooth.scanAndConnect(connected: {update in
                     switch update {
                             case .success(let peripheralId):
                                 //self.log(message: "Successfully connected to " + peripheralId.name)
@@ -153,7 +153,7 @@ class MSKBedfontPlugin: CDVPlugin {
                                 }
                         //self.isConnectedText = "Disconnected"
                     }
-        }
+                                                })
                 }
     }
         
