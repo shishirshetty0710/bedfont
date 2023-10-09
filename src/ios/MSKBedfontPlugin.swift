@@ -183,7 +183,7 @@ class MSKBedfontPlugin: CDVPlugin {
 //                self.performConnect(commandDelegate: commandDelegate)
 //            }
 //        }
-    }
+    
     
     
     func performConnect(commandDelegate: CDVCommandDelegate) {
