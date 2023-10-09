@@ -27,7 +27,7 @@ class MSKBedfontPlugin: CDVPlugin {
     
      let BEDFONT_EVENT_CONNECT_RESULT = "OnConnectResultEvent"
     
-     let BEDFONT_EVENT_SCAN_RESULT = "OnScanResultEvent"
+     //let BEDFONT_EVENT_SCAN_RESULT = "OnScanResultEvent"
     
      let BEDFONT_EVENT_DEVICE_USAGE = "onDeviceUsageEvent"
     
@@ -124,57 +124,96 @@ class MSKBedfontPlugin: CDVPlugin {
     
     func perform_Scanning(commandDelegate: CDVCommandDelegate) {
         if smokerlyzerBluetooth != nil {
-            let didScanStart = smokerlyzerBluetooth.scanForPeripheral(
-                stopOnFirstResult: false,
-                onDiscovery: {single, list in
-                },
-                onStopped: {_, error in
-                    if let error = error {
-                        //self.log(message: "Scan error: " + error.localizedDescription)
-                        self.sendStateChangeEvents(commandDelegate: commandDelegate, eventName: self.BEDFONT_EVENT_SCANSTATECHANGE, boolval: false)
-                    } else {
-                        self.sendStateChangeEvents(commandDelegate: commandDelegate, eventName: self.BEDFONT_EVENT_SCANSTATECHANGE, boolval: false)
-                        //self.log(message: "Scan stopped.")
+            
+        smokerlyzerBluetooth.scanAndConnect { update in
+            switch update {
+            case .success(let peripheralId):
+                //self.log(message: "Successfully connected to " + peripheralId.name)
+                //self.isConnectedText = "Connected"
+                self.sendScanningEvents(commandDelegate: commandDelegate, connectResult: "SUCCESS", logMessage: "Finalized connection. Device is READY")
+            case .successNeedsRecovery(let peripheralId):
+                //self.log(message: "Connected to " + peripheralId.name + ". Recovery is needed before starting breath test.")
+                //self.isConnectedText = "Connected"
+                self.sendScanningEvents(commandDelegate: commandDelegate, connectResult: "SUCCESS_NEEDS_RECOVERY", logMessage: "Finalized connection. Recovery function needs to be run on the sensor")
+            case .zeroing:
+                //self.log(message: "Device is zeroing, please wait")
+                self.sendScanningEvents(commandDelegate: commandDelegate, connectResult: "ZEROING", logMessage: "Zeroing the sensor, please wait...")
+            case .failure(let error):
+                if let error = error as? BluejayError {
+                    switch error{
+                    case .scanFailed:
+                        //self.log(message: "Scanning failed to pick up a device")
+                        self.sendScanningEvents(commandDelegate: commandDelegate, connectResult: "ERROR_SCAN_FAILED", logMessage: "Failed to find device")
+                    case .connectionTimedOut:
+                        //self.log(message: "Failed to connect to device")
+                        self.sendScanningEvents(commandDelegate: commandDelegate, connectResult: "ERROR_FAILED_TO_CONNECT", logMessage: "Failed to connect to device")
+                    default:
+                        //self.log(message: "Error: " + error.localizedDescription)
+                        self.sendScanningEvents(commandDelegate: commandDelegate, connectResult: "ERROR_SCAN_FAILED", logMessage: "Failed to find device")
                     }
                 }
-            )
-            if didScanStart {
-                self.sendStateChangeEvents(commandDelegate: commandDelegate, eventName: self.BEDFONT_EVENT_SCANSTATECHANGE, boolval: true)
-                //self.log(message: "Scan was allowed to start.")
-                self.performConnect(commandDelegate: commandDelegate)
+                //self.isConnectedText = "Disconnected"
             }
         }
+    }
+        
+        
+        
+        
+        
+        
+//        if smokerlyzerBluetooth != nil {
+//            let didScanStart = smokerlyzerBluetooth.scanForPeripheral(
+//                stopOnFirstResult: false,
+//                onDiscovery: {single, list in
+//                },
+//                onStopped: {_, error in
+//                    if let error = error {
+//                        //self.log(message: "Scan error: " + error.localizedDescription)
+//                        self.sendStateChangeEvents(commandDelegate: commandDelegate, eventName: self.BEDFONT_EVENT_SCANSTATECHANGE, boolval: false)
+//                    } else {
+//                        self.sendStateChangeEvents(commandDelegate: commandDelegate, eventName: self.BEDFONT_EVENT_SCANSTATECHANGE, boolval: false)
+//                        //self.log(message: "Scan stopped.")
+//                    }
+//                }
+//            )
+//            if didScanStart {
+//                self.sendStateChangeEvents(commandDelegate: commandDelegate, eventName: self.BEDFONT_EVENT_SCANSTATECHANGE, boolval: true)
+//                //self.log(message: "Scan was allowed to start.")
+//                self.performConnect(commandDelegate: commandDelegate)
+//            }
+//        }
     }
     
     
     func performConnect(commandDelegate: CDVCommandDelegate) {
-        self.isConnectedText = "Connecting"
-        let scanStarted = smokerlyzerBluetooth.scanForPeripheral(
-            onDiscovery: { scan, _ in
-                //self.log(message: "Peripheral found, connecting...")
-                self.sendScanningEvents(commandDelegate: commandDelegate, connectResult: "ZEROING", logMessage: "Zeroing the sensor, please wait...")
-                smokerlyzerBluetooth.connectToPeripheral(peripheral: scan.peripheralIdentifier, connected: {result in
-                    switch result {
-                    case .success(let peripheralId):
-                        //self.log(message: "Successfully connected to " + peripheralId.name)
-                        self.isConnectedText = "Connected"
-                        self.sendScanningEvents(commandDelegate: commandDelegate, connectResult: "SUCCESS", logMessage: "Successfully connected to " + peripheralId.name)
-                        self.sendStateChangeEvents(commandDelegate: commandDelegate, eventName: self.BEDFONT_EVENT_BUTTONNAMECHANGE, boolval: true)
-                    case .failure(let error):
-                        //self.log(message: "Failed to connect with error: \(error.localizedDescription)")
-                        self.isConnectedText = "Disconnected"
-                        self.sendScanningEvents(commandDelegate: commandDelegate, connectResult: "ERROR_FAILED_TO_CONNECT", logMessage: "Failed to connect with error: \(error.localizedDescription)")
-                        self.sendStateChangeEvents(commandDelegate: commandDelegate, eventName: self.BEDFONT_EVENT_BUTTONNAMECHANGE, boolval: false)
-                    }
-                })
-            },
-            onStopped: { _, error in
-                if let error = error {
-                    //self.log(message: "Scan stopped with error: " + error.localizedDescription)
-                }
-            }
-        )
-        //self.log(message: "Scan (with intent to connect) started? " + scanStarted.description)
+//        self.isConnectedText = "Connecting"
+//        let scanStarted = smokerlyzerBluetooth.scanForPeripheral(
+//            onDiscovery: { scan, _ in
+//                //self.log(message: "Peripheral found, connecting...")
+//                self.sendScanningEvents(commandDelegate: commandDelegate, connectResult: "ZEROING", logMessage: "Zeroing the sensor, please wait...")
+//                smokerlyzerBluetooth.connectToPeripheral(peripheral: scan.peripheralIdentifier, connected: {result in
+//                    switch result {
+//                    case .success(let peripheralId):
+//                        //self.log(message: "Successfully connected to " + peripheralId.name)
+//                        self.isConnectedText = "Connected"
+//                        self.sendScanningEvents(commandDelegate: commandDelegate, connectResult: "SUCCESS", logMessage: "Successfully connected to " + peripheralId.name)
+//                        self.sendStateChangeEvents(commandDelegate: commandDelegate, eventName: self.BEDFONT_EVENT_BUTTONNAMECHANGE, boolval: true)
+//                    case .failure(let error):
+//                        //self.log(message: "Failed to connect with error: \(error.localizedDescription)")
+//                        self.isConnectedText = "Disconnected"
+//                        self.sendScanningEvents(commandDelegate: commandDelegate, connectResult: "ERROR_FAILED_TO_CONNECT", logMessage: "Failed to connect with error: \(error.localizedDescription)")
+//                        self.sendStateChangeEvents(commandDelegate: commandDelegate, eventName: self.BEDFONT_EVENT_BUTTONNAMECHANGE, boolval: false)
+//                    }
+//                })
+//            },
+//            onStopped: { _, error in
+//                if let error = error {
+//                    //self.log(message: "Scan stopped with error: " + error.localizedDescription)
+//                }
+//            }
+//        )
+//        //self.log(message: "Scan (with intent to connect) started? " + scanStarted.description)
         
     }
     
@@ -243,7 +282,7 @@ class MSKBedfontPlugin: CDVPlugin {
             "connectResult": connectResult,
             "logMessage": logMessage
         ]
-        self.fireEvent(commandDelegate: commandDelegate, eventName: self.BEDFONT_EVENT_SCAN_RESULT, eventData: eventData)
+        self.fireEvent(commandDelegate: commandDelegate, eventName: "OnScanResultEvent", eventData: eventData)
     }
     
     func sendScanningResults(commandDelegate: CDVCommandDelegate, statusName: String, ppm: Int, isSuccessful: Bool) {
@@ -271,12 +310,9 @@ class MSKBedfontPlugin: CDVPlugin {
 
             // Print the JSON data as a string (for demonstration purposes)
             if let jsonString = String(data: jsonData, encoding: .utf8) {
-                print(eventName)
-                print(jsonString)
-                //let jsCode = "cordova.fireDocumentEvent('OnButtonNameChangeEvent', \(jsonString)"
-                //var jsCode = "cordova.fireDocumentEvent('" + eventName + "'," + jsonString + ")"
-                //commandDelegate.evalJs(jsCode)
-                //print(jsCode)
+                
+                var jsCode = "cordova.fireDocumentEvent('" + eventName + "'," + jsonString + ")"
+                commandDelegate.evalJs(jsCode)
             }
         } catch {
 
