@@ -27,7 +27,7 @@ class MSKBedfontPlugin: CDVPlugin {
     
      let BEDFONT_EVENT_CONNECT_RESULT = "OnConnectResultEvent"
     
-     //let BEDFONT_EVENT_SCAN_RESULT = "OnScanResultEvent"
+     let BEDFONT_EVENT_SCAN_RESULT = "OnScanResultEvent"
     
      let BEDFONT_EVENT_DEVICE_USAGE = "onDeviceUsageEvent"
     
@@ -227,6 +227,19 @@ class MSKBedfontPlugin: CDVPlugin {
     
     func perform_TestNorecovery(commandDelegate: CDVCommandDelegate) {
         if smokerlyzerBluetooth != nil {
+            
+            smokerlyzerBluetooth.startBreathTestNoRecovery {result in
+                switch result {
+                case .success(let ppmResult):
+                    self.sendScanningResults(commandDelegate: commandDelegate, statusName: "PPM value is " + ppmResult.latest.description, ppm: ppmResult.latest, isSuccessful: true)
+                case .failure(let error):
+                    self.sendScanningResults(commandDelegate: commandDelegate, statusName: "Error: " + error.localizedDescription, ppm: -1, isSuccessful: false)
+                }
+            }
+
+            
+            
+            
             smokerlyzerBluetooth.getCoppm(callback: {result in
                 switch result {
                 case .success(let ppm):
@@ -282,7 +295,7 @@ class MSKBedfontPlugin: CDVPlugin {
             "connectResult": connectResult,
             "logMessage": logMessage
         ]
-        self.fireEvent(commandDelegate: commandDelegate, eventName: "OnScanResultEvent", eventData: eventData)
+        self.fireEvent(commandDelegate: commandDelegate, eventName: "OnConnectResultEvent", eventData: eventData)
     }
     
     func sendScanningResults(commandDelegate: CDVCommandDelegate, statusName: String, ppm: Int, isSuccessful: Bool) {
@@ -291,7 +304,7 @@ class MSKBedfontPlugin: CDVPlugin {
             "ppm": ppm,
             "isSuccessful": isSuccessful
         ]
-        self.fireEvent(commandDelegate: commandDelegate, eventName: self.BEDFONT_EVENT_CONNECT_RESULT, eventData: eventData)
+        self.fireEvent(commandDelegate: commandDelegate, eventName: "OnScanResultEvent", eventData: eventData)
     }
     
     func sendDeviceDetails(commandDelegate: CDVCommandDelegate, eventName: String, deviceParam: String) {
