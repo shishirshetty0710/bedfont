@@ -57,14 +57,14 @@ class MSKBedfontPlugin: CDVPlugin {
     
     var isEnabled: Bool = false
     
-    var myCommandDelegate: CDVCommandDelegate?
+    //var myCommandDelegate: CDVCommandDelegate?
     
 
     override func pluginInitialize() {
         super.pluginInitialize()
 
         // Initialize myCommandDelegate with self.commandDelegate during plugin initialization
-        myCommandDelegate = self.commandDelegate
+        //myCommandDelegate = self.commandDelegate
     }
     
     @objc(initialize:)func initialize(command : CDVInvokedUrlCommand) {
@@ -273,12 +273,12 @@ extension MSKBedfontPlugin: ConnectionObserver {
         //log(message: "[connection observer] detected connect event")
         //sensor = peripheral
         //isConnectedText = "Connected"
-        self.sendStateChangeEvents(commandDelegate: myCommandDelegate, boolval: true)
+        self.sendStateChangeEvents(commandDelegate: self.commandDelegate, boolval: true)
     }
 
     func disconnected(from peripheral: PeripheralIdentifier) {
         //log(message: "[connection observer] detected disconnect event")
         //isConnectedText = "Disconnected"
-        self.sendStateChangeEvents(commandDelegate: myCommandDelegate, boolval: false)
+        self.sendStateChangeEvents(commandDelegate: self.commandDelegate, boolval: false)
     }
 }
