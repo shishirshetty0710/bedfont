@@ -164,7 +164,7 @@ class MSKBedfontPlugin: CDVPlugin {
         self.sendStateChangeEvents(commandDelegate: commandDelegate, boolval: false)
         self.isEnabled = false
         if smokerlyzerBluetooth != nil {
-            smokerlyzerBluetooth.disconnectFromPeripheral()
+            smokerlyzerBluetooth.disconnect(force: true)
         }
     }
     
@@ -199,7 +199,7 @@ class MSKBedfontPlugin: CDVPlugin {
     
     func get_DeviceSerialNumber(commandDelegate: CDVCommandDelegate) {
         if smokerlyzerBluetooth != nil {
-            smokerlyzerBluetooth.getSerial(callback: { result in
+            smokerlyzerBluetooth.getSerialNumber(callback: { result in
                 switch result {
                 case .success(let serial):
                     //self.log(message: "Serial number: " + serial.serial)
@@ -273,12 +273,12 @@ extension MSKBedfontPlugin: ConnectionObserver {
         //log(message: "[connection observer] detected connect event")
         //sensor = peripheral
         //isConnectedText = "Connected"
-        self.sendStateChangeEvents(commandDelegate: myCommandDelegate, eventName: "OnButtonNameChangeEvent", boolval: true)
+        self.sendStateChangeEvents(commandDelegate: myCommandDelegate, boolval: true)
     }
 
     func disconnected(from peripheral: PeripheralIdentifier) {
         //log(message: "[connection observer] detected disconnect event")
         //isConnectedText = "Disconnected"
-        self.sendStateChangeEvents(commandDelegate: myCommandDelegate, eventName: "OnButtonNameChangeEvent", boolval: false)
+        self.sendStateChangeEvents(commandDelegate: myCommandDelegate, boolval: false)
     }
 }
