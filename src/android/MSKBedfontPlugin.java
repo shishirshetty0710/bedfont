@@ -333,7 +333,7 @@ public class MSKBedfontPlugin extends CordovaPlugin {
             smokerlyzerBluetoothLeManager.getIsConnected((r2) -> {
                 if (r2) {
                     smokerlyzerBluetoothLeManager.getBatteryReading((r) -> {
-                        sendDeviceDetails(BEDFONT_EVENT_DEVICE_BATTERY, ""+r.volts);
+                        sendDeviceDetails(BEDFONT_EVENT_DEVICE_BATTERY, ""+r);
                     });
                 } else{
                     sendDeviceDetails(BEDFONT_EVENT_DEVICE_BATTERY, "Device Not Connected");
