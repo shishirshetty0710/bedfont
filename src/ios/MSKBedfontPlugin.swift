@@ -13,7 +13,7 @@ var smokerlyzerBluetooth = SmokerlyzerBluetooth()
 
 
 @objc(MSKBedfontPlugin)
-class MSKBedfontPlugin: CDVPlugin {
+class MSKBedfontPlugin: CDVPlugin, ConnectionObserver {
     
      let BEDFONT_EVENT_RECOVERYCHANGE = "OnRecoveryChangeEvent"
     
@@ -120,6 +120,24 @@ class MSKBedfontPlugin: CDVPlugin {
         self.get_DeviceSerialNumber(commandDelegate: self.commandDelegate)
         let result = CDVPluginResult.init(status: CDVCommandStatus_OK)
         self.commandDelegate.send(result, callbackId: command.callbackId)
+    }
+    
+    
+    func bluetoothAvailable(_ available: Bool) {
+        //log(message: "Bluetooth available: \(available)")
+    }
+
+    func connected(to peripheral: PeripheralIdentifier) {
+        //log(message: "[connection observer] detected connect event")
+        //sensor = peripheral
+        //isConnectedText = "Connected"
+        self.sendStateChangeEvents(commandDelegate: self.commandDelegate, boolval: true)
+    }
+
+    func disconnected(from peripheral: PeripheralIdentifier) {
+        //log(message: "[connection observer] detected disconnect event")
+        //isConnectedText = "Disconnected"
+        self.sendStateChangeEvents(commandDelegate: self.commandDelegate, boolval: false)
     }
     
     
@@ -264,21 +282,21 @@ class MSKBedfontPlugin: CDVPlugin {
 }
 
 
-extension MSKBedfontPlugin: ConnectionObserver {
-    func bluetoothAvailable(_ available: Bool) {
-        //log(message: "Bluetooth available: \(available)")
-    }
-
-    func connected(to peripheral: PeripheralIdentifier) {
-        //log(message: "[connection observer] detected connect event")
-        //sensor = peripheral
-        //isConnectedText = "Connected"
-        self.sendStateChangeEvents(commandDelegate: self.commandDelegate, boolval: true)
-    }
-
-    func disconnected(from peripheral: PeripheralIdentifier) {
-        //log(message: "[connection observer] detected disconnect event")
-        //isConnectedText = "Disconnected"
-        self.sendStateChangeEvents(commandDelegate: self.commandDelegate, boolval: false)
-    }
-}
+//extension MSKBedfontPlugin: ConnectionObserver {
+//    func bluetoothAvailable(_ available: Bool) {
+//        //log(message: "Bluetooth available: \(available)")
+//    }
+//
+//    func connected(to peripheral: PeripheralIdentifier) {
+//        //log(message: "[connection observer] detected connect event")
+//        //sensor = peripheral
+//        //isConnectedText = "Connected"
+//        self.sendStateChangeEvents(commandDelegate: self.commandDelegate, boolval: true)
+//    }
+//
+//    func disconnected(from peripheral: PeripheralIdentifier) {
+//        //log(message: "[connection observer] detected disconnect event")
+//        //isConnectedText = "Disconnected"
+//        self.sendStateChangeEvents(commandDelegate: self.commandDelegate, boolval: false)
+//    }
+//}
