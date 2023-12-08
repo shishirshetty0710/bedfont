@@ -156,8 +156,8 @@ public class MSKBedfontPlugin extends CordovaPlugin {
                 result.setKeepCallback(false);
                 callback.sendPluginResult(result);
                 return true;
-            case "getDeviceSerialNumber":
-                 getDeviceSerialNumber();
+            case "getDeviceBattery":
+                 getDeviceBattery();
                  result = new PluginResult(PluginResult.Status.OK);
                  result.setKeepCallback(false);
                  callback.sendPluginResult(result);
