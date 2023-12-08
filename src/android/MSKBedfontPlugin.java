@@ -46,7 +46,7 @@ public class MSKBedfontPlugin extends CordovaPlugin {
 
     private static final String BEDFONT_EVENT_DEVICE_SERIALNUMBER = "onDeviceSerialNumberEvent";
 
-    private static final String BEDFONT_EVENT_DEVICE_BATTERY = "onDeviceSerialBatttery";
+    private static final String BEDFONT_EVENT_DEVICE_BATTERY = "onDeviceBatttery";
 
 
 
