@@ -122,6 +122,13 @@ class MSKBedfontPlugin: CDVPlugin, ConnectionObserver {
         self.commandDelegate.send(result, callbackId: command.callbackId)
     }
     
+    @objc(getDeviceBattery:)func getDeviceBattery(command : CDVInvokedUrlCommand) {
+        
+        self.get_DeviceBattery(commandDelegate: self.commandDelegate)
+        let result = CDVPluginResult.init(status: CDVCommandStatus_OK)
+        self.commandDelegate.send(result, callbackId: command.callbackId)
+    }
+    
     
     func bluetoothAvailable(_ available: Bool) {
         //log(message: "Bluetooth available: \(available)")
@@ -225,6 +232,21 @@ class MSKBedfontPlugin: CDVPlugin, ConnectionObserver {
                 case .failure(let error):
                     //self.log(message: "Error: " + error.localizedDescription)
                     self.sendDeviceDetails(commandDelegate: commandDelegate, eventName: "onDeviceSerialNumberEvent", deviceParam: "Error: " + error.localizedDescription)
+                }
+            })
+        }
+    }
+    
+    func get_DeviceBattery(commandDelegate: CDVCommandDelegate) {
+        if smokerlyzerBluetooth != nil {
+            smokerlyzerBluetooth.getBatteryReading(callback: { result in
+                switch result {
+                case .success(let battery):
+                    //self.log(message: "Serial number: " + serial.serial)
+                    self.sendDeviceDetails(commandDelegate: commandDelegate, eventName: "onDeviceBatteryEvent", deviceParam: String(battery.volts))
+                case .failure(let error):
+                    //self.log(message: "Error: " + error.localizedDescription)
+                    self.sendDeviceDetails(commandDelegate: commandDelegate, eventName: "onDeviceBatteryEvent", deviceParam: "Error: " + error.localizedDescription)
                 }
             })
         }

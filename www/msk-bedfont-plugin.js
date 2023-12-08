@@ -25,6 +25,9 @@ module.exports = {
     },
     getDeviceSerialNumber: function(success, error) {
         exec(success, error, 'MSKBedfontPlugin', 'getDeviceSerialNumber');
+    },
+    getDeviceBattery: function(success, error) {
+        exec(success, error, 'MSKBedfontPlugin', 'getDeviceBattery');
     }
 
 }

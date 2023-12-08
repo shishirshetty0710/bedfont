@@ -46,6 +46,8 @@ public class MSKBedfontPlugin extends CordovaPlugin {
 
     private static final String BEDFONT_EVENT_DEVICE_SERIALNUMBER = "onDeviceSerialNumberEvent";
 
+    private static final String BEDFONT_EVENT_DEVICE_BATTERY = "onDeviceSerialBatttery";
+
 
 
     private static final String SUCCESS = "SUCCESS";
@@ -154,6 +156,12 @@ public class MSKBedfontPlugin extends CordovaPlugin {
                 result.setKeepCallback(false);
                 callback.sendPluginResult(result);
                 return true;
+            case "getDeviceSerialNumber":
+                 getDeviceSerialNumber();
+                 result = new PluginResult(PluginResult.Status.OK);
+                 result.setKeepCallback(false);
+                 callback.sendPluginResult(result);
+                 return true;
 
         }
 
@@ -316,6 +324,19 @@ public class MSKBedfontPlugin extends CordovaPlugin {
                     });
                 } else{
                     sendDeviceDetails(BEDFONT_EVENT_DEVICE_SERIALNUMBER, "Device Not Connected");
+                }
+            });
+    }
+
+    private void getDeviceBattery() {
+        if(smokerlyzerBluetoothLeManager!=null)
+            smokerlyzerBluetoothLeManager.getIsConnected((r2) -> {
+                if (r2) {
+                    smokerlyzerBluetoothLeManager.getBatteryReading((r) -> {
+                        sendDeviceDetails(BEDFONT_EVENT_DEVICE_BATTERY, ""+r.volts);
+                    });
+                } else{
+                    sendDeviceDetails(BEDFONT_EVENT_DEVICE_BATTERY, "Device Not Connected");
                 }
             });
     }
