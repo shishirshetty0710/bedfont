@@ -120,15 +120,15 @@ public class MSKBedfontPlugin extends CordovaPlugin {
             case "getStatus":
                   if(smokerlyzerBluetoothLeManager!=null) {
                     smokerlyzerBluetoothLeManager.getIsConnected((isConnected) -> {
-                      PluginResult result;
+                      PluginResult _result;
                         if(isConnected) {
-                           result = new PluginResult(PluginResult.Status.OK);
+                           _result = new PluginResult(PluginResult.Status.OK);
                         }
                         else {
-                           result = new PluginResult(PluginResult.Status.ERROR, "Device is not connected");
+                           _result = new PluginResult(PluginResult.Status.ERROR, "Device is not connected");
                         }
-                        result.setKeepCallback(false);
-                        callback.sendPluginResult(result);
+                        _result.setKeepCallback(false);
+                        callback.sendPluginResult(_result);
                     });
                   }
 
