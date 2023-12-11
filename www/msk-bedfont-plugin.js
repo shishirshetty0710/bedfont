@@ -8,6 +8,9 @@ module.exports = {
     dispose: function(success, error) {
         exec(success, error, 'MSKBedfontPlugin', 'dispose');
     },
+    getStatus: function(success, error) {
+        exec(success, error, 'MSKBedfontPlugin', 'getStatus');
+    },
     performScanning: function(success, error) {
         exec(success, error, 'MSKBedfontPlugin', 'performScanning');
     },

@@ -87,6 +87,22 @@ class MSKBedfontPlugin: CDVPlugin, ConnectionObserver {
         self.commandDelegate.send(result, callbackId: command.callbackId)
     }
     
+    @objc(getStatus:)func getStatus(command : CDVInvokedUrlCommand) {
+        if smokerlyzerBluetooth != nil {
+            smokerlyzerBluetooth.getIsConnected { result in
+                if(result) {
+                    let result = CDVPluginResult.init(status: CDVCommandStatus_OK)
+                    self.commandDelegate.send(result, callbackId: command.callbackId)
+                } else {
+                    let errorMessage = "Device is not connected"
+                    let result = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: errorMessage)
+                    self.commandDelegate.send(result, callbackId: command.callbackId)
+                }
+            }
+        }
+        
+    }
+    
     @objc(performScanning:)func performScanning(command : CDVInvokedUrlCommand) {
         
         self.perform_Scanning(commandDelegate: self.commandDelegate)
