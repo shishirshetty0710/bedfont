@@ -128,9 +128,10 @@ public class MSKBedfontPlugin extends CordovaPlugin {
                         }
                         result.setKeepCallback(false);
                         callback.sendPluginResult(result);
-                        return true;
                     });
                   }
+
+                  return true;
 
             case "performScanning":
                 performScanning();
