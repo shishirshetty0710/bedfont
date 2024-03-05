@@ -46,7 +46,7 @@
         </config-file>
         <!-- END AndroidManifiest.xml -->
 
-
+        <framework src="androidx.appcompat:appcompat:1.2.0" />
         <!-- Gradle -->
         <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
         <!-- END Gradle -->
