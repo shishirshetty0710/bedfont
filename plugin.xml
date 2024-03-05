@@ -49,6 +49,8 @@
         <framework src="androidx.appcompat:appcompat:1.2.0" />
         <!-- Gradle -->
         <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
+        <framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
+        <framework src="src/android/gradle.properties" custom="true" type="gradleReference" />
         <!-- END Gradle -->
 
         <dependency id="cordova-custom-config" version="^5.1.1" />
