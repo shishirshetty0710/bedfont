@@ -44,6 +44,9 @@
             <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
             <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
         </config-file>
+        <edit-config parent="/*" target="AndroidManifest.xml">
+            <application tools:replace="android:appComponentFactory" />
+        </edit-config>
         <!-- END AndroidManifiest.xml -->
 
 
