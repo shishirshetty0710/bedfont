@@ -23,7 +23,6 @@ dependencies {
     api (group:'com.bedfont.icosdk', name:'iCOBluetoothsdk', version:'2.0.0.15', ext: 'aar', classifier:'release') {
         transitive = true;
     }
-    //implementation(name: 'iCOBluetoothsdk-2.0.0.15-release', ext: 'aar')
 
     implementation 'com.android.support:support-v4:28.0.0'
     implementation 'com.android.support:appcompat-v7:28.0.0'

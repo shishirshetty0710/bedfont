@@ -19,6 +19,7 @@
             <feature name="MSKBedfontPlugin">
                 <param name="android-package" value="org.mskcc.bedfont.MSKBedfontPlugin" />
             </feature>
+             <preference name="AndroidXEnabled" value="true"/>
         </config-file>
         <config-file parent="/*" target="AndroidManifest.xml"></config-file>
         <source-file src="src/android/MSKBedfontPlugin.java" target-dir="src/org/mskcc/bedfont/MSKBedfontPlugin" />
@@ -44,10 +45,12 @@
             <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
             <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
         </config-file>
-        <edit-config parent="/*" target="AndroidManifest.xml">
+        <!-- <edit-config parent="/*" target="AndroidManifest.xml">
             <application tools:replace="android:appComponentFactory" />
-        </edit-config>
+        </edit-config> -->
         <!-- END AndroidManifiest.xml -->
+        <framework src="androidx.appcompat:appcompat:1.3.0" />
+       <framework src="androidx.constraintlayout:constraintlayout:2.0.4" />
 
 
         <!-- Gradle -->
