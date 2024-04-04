@@ -10,31 +10,51 @@
 		</data>
 		<key>Headers/SmokerlyzerSDK-Swift.h</key>
 		<data>
-		/XcDhU2LKA78i9RoW+GDjhdE5ro=
+		g2uWQrtMzaNmtHAVSlERaPvxd7Y=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		5WNL9eUdhUrFnPKti4eiPhF5gow=
+		jzNPnGms70xTNQnXv+G6F/m+aF0=
 		</data>
-		<key>Modules/SmokerlyzerSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
+		<key>Modules/SmokerlyzerSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
 		5cngsOtLF0B5KWBWwBWXAF5khLg=
 		</data>
-		<key>Modules/SmokerlyzerSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
+		<key>Modules/SmokerlyzerSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		mhfWe/awIwmQZPFrcdGaGsMDfBo=
+		8b07vz3rhSRyUJk5fbe/N1x5xKo=
 		</data>
-		<key>Modules/SmokerlyzerSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
+		<key>Modules/SmokerlyzerSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		sRNMunvJTTHhQxWdySC9Z25FJkw=
+		joD3+v+G/Jmh5h2DA/Sq1Zqq/Ig=
 		</data>
-		<key>Modules/SmokerlyzerSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
+		<key>Modules/SmokerlyzerSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		mhfWe/awIwmQZPFrcdGaGsMDfBo=
+		8b07vz3rhSRyUJk5fbe/N1x5xKo=
 		</data>
-		<key>Modules/SmokerlyzerSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
+		<key>Modules/SmokerlyzerSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		9fwWahoN5moIR7qXVOsbVW4UCSQ=
+		EpA1EnJgQWO5owlJabXtxPc4rhI=
+		</data>
+		<key>Modules/SmokerlyzerSDK.swiftmodule/arm64e-apple-ios.abi.json</key>
+		<data>
+		5cngsOtLF0B5KWBWwBWXAF5khLg=
+		</data>
+		<key>Modules/SmokerlyzerSDK.swiftmodule/arm64e-apple-ios.private.swiftinterface</key>
+		<data>
+		XSqiXk2W7R9oGYV88S7g+DNVgw4=
+		</data>
+		<key>Modules/SmokerlyzerSDK.swiftmodule/arm64e-apple-ios.swiftdoc</key>
+		<data>
+		ZGfohN5/Sb86gtOGbwMEhwRPwrk=
+		</data>
+		<key>Modules/SmokerlyzerSDK.swiftmodule/arm64e-apple-ios.swiftinterface</key>
+		<data>
+		XSqiXk2W7R9oGYV88S7g+DNVgw4=
+		</data>
+		<key>Modules/SmokerlyzerSDK.swiftmodule/arm64e-apple-ios.swiftmodule</key>
+		<data>
+		qzhusl/0iFgvysfoXQhqEe1URdE=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -54,42 +74,77 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			kxUpn4mMVCyZWEkESFL4FbvlW+BAVAIB57hgiMBJ8/8=
+			p1hErbSmOqlg06FL0dmIU97eGzTwnllxSpHIJg8VC4w=
 			</data>
 		</dict>
-		<key>Modules/SmokerlyzerSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
+		<key>Modules/SmokerlyzerSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
 			NOCBG3O/FZZ8aHcevAW7zalhybtC/mEF43nT7s8yni8=
 			</data>
 		</dict>
-		<key>Modules/SmokerlyzerSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
+		<key>Modules/SmokerlyzerSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			89qbMPcgF+VfpRY8r2czjf+x1zOqYLFKwCnYuuRubL8=
+			uSx/1xVWCsq5gGa7qJMluS8MAJhgnYlAbBKmco2TZuI=
 			</data>
 		</dict>
-		<key>Modules/SmokerlyzerSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
+		<key>Modules/SmokerlyzerSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Wmy1j3Fp+6FCOWbosG1IUr3DCDzcJwSlnybh7p9xSPI=
+			WZCXe88WGtVTavKIF5ibb+lR5tOGC8qW9JXZUb7X9Tk=
 			</data>
 		</dict>
-		<key>Modules/SmokerlyzerSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
+		<key>Modules/SmokerlyzerSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			89qbMPcgF+VfpRY8r2czjf+x1zOqYLFKwCnYuuRubL8=
+			uSx/1xVWCsq5gGa7qJMluS8MAJhgnYlAbBKmco2TZuI=
 			</data>
 		</dict>
-		<key>Modules/SmokerlyzerSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
+		<key>Modules/SmokerlyzerSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			0hHnwuE/6PSKtzXMcesg3WWOyXu3t5uuUSbr4ctDUk0=
+			FnkokKm9KsKHDiDl6QPHDTjb8tmn7MTSqaU0ufLXqtE=
+			</data>
+		</dict>
+		<key>Modules/SmokerlyzerSDK.swiftmodule/arm64e-apple-ios.abi.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			NOCBG3O/FZZ8aHcevAW7zalhybtC/mEF43nT7s8yni8=
+			</data>
+		</dict>
+		<key>Modules/SmokerlyzerSDK.swiftmodule/arm64e-apple-ios.private.swiftinterface</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			4EF1HeDFUPeRUCuwWpwuXwQJbR684cCWDJEZHo1QM9E=
+			</data>
+		</dict>
+		<key>Modules/SmokerlyzerSDK.swiftmodule/arm64e-apple-ios.swiftdoc</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Cec6DLlRzRmdex0upuIemTfr2eqcODvMSl7qCbKDtH0=
+			</data>
+		</dict>
+		<key>Modules/SmokerlyzerSDK.swiftmodule/arm64e-apple-ios.swiftinterface</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			4EF1HeDFUPeRUCuwWpwuXwQJbR684cCWDJEZHo1QM9E=
+			</data>
+		</dict>
+		<key>Modules/SmokerlyzerSDK.swiftmodule/arm64e-apple-ios.swiftmodule</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			FpOFnZRLvrdFe4RbEw3jKybcgOD6rfQxJJgm9ujKtVk=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
