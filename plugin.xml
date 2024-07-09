@@ -55,7 +55,7 @@
         <dependency id="cordova-custom-config" version="^5.1.1" />
 
         <!-- To Handle on launch crash -->
-        <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application">
+        <!-- <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application">
             <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="org.mskcc.validicpluginsandbox.androidx-startup"
@@ -64,7 +64,7 @@
                 android:name="androidx.work.WorkManagerInitializer"
                 android:value="androidx.startup" />
             </provider>    
-        </edit-config>
+        </edit-config> -->
 
     </platform>
 
