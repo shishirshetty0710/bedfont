@@ -1,0 +1,4 @@
+framework module SmokerlyzerSDK {
+  header "SmokerlyzerSDK-Swift.h"
+  requires objc
+}
