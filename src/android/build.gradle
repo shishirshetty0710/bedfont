@@ -20,7 +20,7 @@ repositories {
 }
 dependencies {
 
-    api (group:'com.bedfont.icosdk', name:'iCOBluetoothsdk', version:'2.0.0.15', ext: 'aar', classifier:'release') {
+    api (group:'com.bedfont.icosdk', name:'iCOBluetoothsdk', version:'2.0.0.16', ext: 'aar', classifier:'release') {
         transitive = true;
     }
 
