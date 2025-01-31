@@ -20,8 +20,8 @@ import android.app.Application;
 import android.util.Log;
 
 import com.bedfont.icosdk.ble.v2.*;
-
 import io.reactivex.disposables.Disposable;
+
 
 public class MSKBedfontPlugin extends CordovaPlugin {
 
