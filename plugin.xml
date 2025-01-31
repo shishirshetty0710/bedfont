@@ -29,7 +29,7 @@
         </config-file>
 
         <!-- SDK files -->
-        <resource-file src="src/android/libs/iCOBluetoothsdk-2.0.0.17-release.aar" target="libs/iCOBluetoothsdk-2.0.0.17-release.aar" />
+        <resource-file src="src/android/libs/iCOBluetoothsdk-2.0.0.15-release.aar" target="libs/iCOBluetoothsdk-2.0.0.15-release.aar" />
         <!-- END SDK files -->
 
         <!-- AndroidManifiest.xml Permissions -->
